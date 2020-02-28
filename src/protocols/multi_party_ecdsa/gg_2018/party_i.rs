@@ -29,6 +29,7 @@ use curv::elliptic::curves::traits::*;
 use curv::BigInt;
 use curv::FE;
 use curv::GE;
+use curv::SK;
 use paillier::KeyGeneration;
 use paillier::Paillier;
 use paillier::{Decrypt, RawCiphertext, RawPlaintext};
@@ -143,6 +144,15 @@ pub struct SignatureRecid {
     pub recid: u8,
 }
 
+fn new_random() -> FE {
+    let mut arr = [1u8; 32];
+
+    let mut fe: FE = ECScalar::new_random();
+    fe.set_element(SK::from_slice(&arr[0..arr.len()]).unwrap());
+
+    fe
+}
+
 impl Keys {
     pub fn create(index: usize) -> Self {
         let u = FE::new_random();
@@ -160,7 +170,7 @@ impl Keys {
 
     // we recommend using safe primes if the code is used in production
     pub fn create_safe_prime(index: usize) -> Keys {
-        let u: FE = ECScalar::new_random();
+        let u: FE = new_random();
         let y = &ECPoint::generator() * &u;
 
         let (ek, dk) = Paillier::keypair_safe_primes().keys();
@@ -396,13 +406,13 @@ impl SignKeys {
         let w_i = li * private.x_i;
         let g: GE = ECPoint::generator();
         let g_w_i = g * w_i;
-        let gamma_i: FE = ECScalar::new_random();
+        let gamma_i: FE = new_random();
         let g_gamma_i = g * gamma_i;
 
         Self {
             w_i,
             g_w_i,
-            k_i: ECScalar::new_random(),
+            k_i: new_random(),
             gamma_i,
             g_gamma_i,
         }
@@ -492,8 +502,8 @@ impl LocalSignature {
         let m_fe: FE = ECScalar::from(message);
         let r: FE = ECScalar::from(&R.x_coor().unwrap().mod_floor(&FE::q()));
         let s_i = m_fe * k_i + r * sigma_i;
-        let l_i: FE = ECScalar::new_random();
-        let rho_i: FE = ECScalar::new_random();
+        let l_i: FE = new_random();
+        let rho_i: FE = new_random();
         Self {
             l_i,
             rho_i,

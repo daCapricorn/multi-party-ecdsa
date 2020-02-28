@@ -145,7 +145,7 @@ pub struct SignatureRecid {
 }
 
 fn new_random() -> FE {
-    let mut arr = [1u8; 32];
+    let arr = [1u8; 32];
 
     let mut fe: FE = ECScalar::new_random();
     fe.set_element(SK::from_slice(&arr[0..arr.len()]).unwrap());
@@ -155,7 +155,7 @@ fn new_random() -> FE {
 
 impl Keys {
     pub fn create(index: usize) -> Self {
-        let u = FE::new_random();
+        let u = new_random();
         let y = GE::generator() * u;
         let (ek, dk) = Paillier::keypair().keys();
 

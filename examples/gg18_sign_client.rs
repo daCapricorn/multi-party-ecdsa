@@ -124,6 +124,8 @@ fn main() {
         uuid.clone(),
     );
 
+    println!("{:?}", round1_ans_vec);
+
     let mut j = 0;
     let mut bc1_vec: Vec<SignBroadcastPhase1> = Vec::new();
     let mut m_a_vec: Vec<MessageA> = Vec::new();
@@ -196,6 +198,7 @@ fn main() {
         "round2",
         uuid.clone(),
     );
+    println!("{:?}", round2_ans_vec);
 
     let mut m_b_gamma_rec_vec: Vec<MessageB> = Vec::new();
     let mut m_b_w_rec_vec: Vec<MessageB> = Vec::new();
@@ -256,6 +259,8 @@ fn main() {
         "round3",
         uuid.clone(),
     );
+    println!("{:?}", round3_ans_vec);
+
     let mut delta_vec: Vec<FE> = Vec::new();
     format_vec_from_reads(
         &round3_ans_vec,
@@ -283,6 +288,7 @@ fn main() {
         "round4",
         uuid.clone(),
     );
+    println!("{:?}", round4_ans_vec);
 
     let mut decommit_vec: Vec<SignDecommitPhase1> = Vec::new();
     format_vec_from_reads(
@@ -327,6 +333,7 @@ fn main() {
         "round5",
         uuid.clone(),
     );
+    println!("{:?}", round5_ans_vec);
 
     let mut commit5a_vec: Vec<Phase5Com1> = Vec::new();
     format_vec_from_reads(
@@ -358,6 +365,7 @@ fn main() {
         "round6",
         uuid.clone(),
     );
+    println!("{:?}", round6_ans_vec);
 
     let mut decommit5a_and_elgamal_and_dlog_vec: Vec<(Phase5ADecom1, HomoELGamalProof, DLogProof)> =
         Vec::new();
@@ -412,6 +420,7 @@ fn main() {
         "round7",
         uuid.clone(),
     );
+    println!("{:?}", round7_ans_vec);
 
     let mut commit5c_vec: Vec<Phase5Com2> = Vec::new();
     format_vec_from_reads(
@@ -438,6 +447,7 @@ fn main() {
         "round8",
         uuid.clone(),
     );
+    println!("{:?}", round8_ans_vec);
 
     let mut decommit5d_vec: Vec<Phase5DDecom2> = Vec::new();
     format_vec_from_reads(
@@ -479,6 +489,7 @@ fn main() {
         "round9",
         uuid.clone(),
     );
+    println!("{:?}", round9_ans_vec);
 
     let mut s_i_vec: Vec<FE> = Vec::new();
     format_vec_from_reads(&round9_ans_vec, party_num_int as usize, s_i, &mut s_i_vec);
